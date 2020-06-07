@@ -1,0 +1,17 @@
+<h1>NEWS APP</h1>
+<nav>
+    <ul>
+        <li *ngIf="!userData">
+            <a [routerLink]="'/'">Home</a>
+        </li>
+        <li *ngIf="userData">
+            <a [routerLink]="'/connected'">Connected</a>
+        </li>
+        <li *ngIf="userData">
+          <a [routerLink]="'/bookmarks'">Bookmarks</a>
+        </li>
+        <li *ngIf="userData">
+            <a href="#" (click)="logout()">Logout</a>
+        </li>
+    </ul>
+</nav>

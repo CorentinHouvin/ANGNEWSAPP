@@ -1,0 +1,27 @@
+<form [formGroup]="formSearchData" (submit)="search(formSearchData.value)">
+
+  <label>Select your information source and keywords (optional)</label>
+  <select *ngIf="sources" formControlName="source" required>
+    <option *ngFor="let source of sources" [value]="source.id">{{ source.name }}</option>
+  </select>
+
+  <input type="text" formControlName="keywords" placeholder="Any keywords?">
+
+  <button [disabled]="!formSearchData.valid" type="submit">Search</button>
+  <button (click)="resetForm()" type="button">Reset form</button>
+  <button [disabled]="!formSearchData.value.source" (click)="addToBookmarks(formSearchData.value.source)" type="button">Add to bookmarks</button>
+</form>
+
+<div *ngIf="listNews" class="news">
+  <div *ngFor="let news of listNews | slice:0:10;">
+    <div>
+      <img src="{{ news.urlToImage }}" alt="">
+    </div>
+    <div>
+      <p class="date">{{ news.publishedAt }}</p>
+      <p class="title">{{ news.title }}</p>
+      <p class="description">{{ (news.description | slice:0:60) + '...' }}</p>
+      <a href="{{ news.url }}" target="_blank">Read more</a>
+    </div>
+  </div>
+</div>
